@@ -10,39 +10,42 @@ export default class FilterOrulo extends Component {
         {'broker': 'corretor'},
         {'exchange_units': 'Dação'}
       ],
+      disableArea: true
     }
+  }
+
+  loadCities = (city) => {
+    console.log(city)
   }
 
   render() {
     return(
       <Card className="p-3">
-        <Form>
+        <Form style={}>
           <Form.Group controlId="formBasicCity">
             <Form.Label>Cidade</Form.Label>
-            <Form.Control type="text" placeholder="Ex.: Belo Horizonte, MG" />
+            <Form.Control type="text" placeholder="Ex.: Belo Horizonte, MG" onKeyUp={this.loadCities.bind(this)} />
           </Form.Group>
 
           <Form.Group controlId="formBasicArea">
             <Form.Label>Bairro</Form.Label>
-            <Form.Control type="text" placeholder="Informe o bairo" />
+            <Form.Control type="text" placeholder="Informe o bairo" disabled={this.state.disableArea} />
           </Form.Group>
 
-          <Form.Group controlId="formBasicOpportunity">
-            <Form.Label>Oportunidade para</Form.Label>
-            <div key="default-checkbox" className="mb-3">
-              {this.state.opportunities.map(obj => {
-                <Form.Check
-                  type={"checkbox"}
-                  /* id={Object.keys(obj)[0]}
-                  label={Object.values(obj)[0]} */
-                />
-              })}
-            </div>
-            <Form.Control as="select">
-              <option value="client">Cliente</option>
-              <option value="broker">Corretor</option>
-              <option value="exchange_units">Dação</option>
-            </Form.Control>
+          <Form.Group as={Row} controlId="formBasicOpportunity">
+            <Col sm="5">
+              <Form.Label>Oportunidade para</Form.Label>
+              <div key="default-checkbox" className="mb-3">
+                {this.state.opportunities.map(obj => (
+                  <Form.Check
+                    type={"checkbox"}
+                    name={Object.keys(obj)[0]}
+                    id={Object.keys(obj)[0]}
+                    label={Object.values(obj)[0]}
+                  />
+                ))}
+              </div>
+            </Col>
           </Form.Group>
 
           <Form.Group controlId="formBasicOpportunity">
